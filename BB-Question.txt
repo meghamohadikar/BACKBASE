@@ -1,0 +1,267 @@
+
+class Test
+{
+
+ public static void main(String ar[])throws Exception
+ 
+ {
+ 
+ 
+ Thread.sleep(90);
+ 
+ System.out.println("test");
+ 
+ }
+ }
+ 
+ 
+ opt:  1) compilation error
+       2) Runtime error
+       3) test	   -->ans
+ 
+ 
+===============
+class Test
+{
+
+ public static void main(String ar[])throws Exception
+ {
+	
+	int x=0,y,total;
+	
+	for(x=0;x<=5;x++)
+		
+		{
+			
+			
+			y=x+x;
+			total+=y;
+			
+		}
+		
+		sop(total); 
+		
+ }
+ 
+opt:	 
+     1)30    -->ans
+     2)50
+     3)20	 
+		
+		
+========================
+
+class Test
+{
+	
+	public static void main(String ar[])throws Exception
+ {
+		Float f[]=new Float[5]
+		
+		Object b= f;
+		
+		sop(f[0]);
+		
+	}
+	
+	op  - 1) 0
+	      2) 0.0
+		  3)compilation error-->ans
+		  4)runtime error
+	
+=============================	
+
+class Test{		
+	
+public static void main(String ar[])throws Exception
+ {
+
+
+
+final int x=10;
+
+byte b=x;
+
+
+sop(b);
+
+
+
+}
+
+
+opt: 
+1)runtime error
+2)compilation error
+3)10 -->ans
+
+====================================
+
+What is true about vector and arraylist
+
+1) arraylist is faster than vector -->ans
+2) vector is faster than arraylist
+3)
+4)
+	
+=====================================
+
+which one is controller in mvc-2 architecture
+
+1) javabeans
+2) servlet
+3) JSP 
+
+=============================
+	
+Spring web mvc	framework design around 
+
+1)action servelet
+2)design servlet
+3)servlet dispatcher-->ans
+4)none above
+
+
+=============================
+
+Which pattern does camel support.
+
+1)EIP -->ans
+2)Composite Pattern
+3)Proxy Pattern
+4)Flyweight Pattern.
+
+=======================
+What are DSLs-
+
+1) java dsl and xml spring
+
+
+
+========================
+
+UUP stands for
+
+1)Unique user profile
+2)----
+3)---
+4)---
+
+==========================
+
+RAML stand for
+
+1) restful api modeling lang.
+2)--
+3)--
+
+=============================
+what is true of raml
+select any 3 from below.
+
+1) its contract between FE and BE.
+2)
+3)
+4)
+
+
+
+====================
+ a direct integration service is useful in the following scenarios:
+select any 3 from below..
+
+1)The core backend system can provide all of the functionalities required by the widgets.
+
+2)The core backend system can respond in a timely manner-->ans
+
+3)When there is no need to persist data to achieve the desired functionality.
+
+===================================
+
+What are the services that compose a DBS capability?
+
+1)Presentation service, persistence service, integration service-->ans
+
+2)Presentation service, Edge service, integration service
+
+3)Presentation service, persistence service, platform service
+
+4)Registry service, persistence service, integration service
+
+
+====================================
+
+by default which auth services used in dcx.
+
+1) ldap
+2) outh2
+3)
+
+=====================================
+
+can we delete folder by using API.(Content managment )
+
+1) true
+2) false
+3) delete all used widget from folder
+4) delete sub-folder
+
+
+===================================
+Rendition provide which functtionality.
+
+
+===================================
+what we can audit in auditig services
+
+1) provison
+2) transaction
+
+==========================================
+
+
+
+Authentication  -- 2-3
+Edge service ---
+
+downstream and upstream--
+
+=====
+
+
+
+
+
+
+
+===================================
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	

@@ -1,0 +1,50 @@
+
+
+server:
+  port: 9915
+
+# API Registry client configuration
+eureka:
+  instance:
+    appname: ${spring.application.name}
+    healthCheckUrlPath: /production-support/health
+    statusPageUrlPath: /production-support/info
+    nonSecurePort: ${server.port}
+    metadata-map:
+      public: true
+      role: live
+  client:
+    serviceUrl:
+      defaultZone: http://${REGISTRY_HOST:localhost}:${REGISTRY_PORT:8080}/registry/eureka/
+
+# Logging
+logging:
+  level:
+    root: INFO
+    com.backbase: INFO
+    org.springframework: INFO
+
+# Configure Internal JWT handler
+sso:
+  jwt:
+    internal:
+      signature:
+        key:
+          type: ENV
+          value: SIG_SECRET_KEY
+
+# Define app defaults
+endpoints:
+  jmx:
+    domain: ${spring.application.name}
+
+# Spring health monitoring
+management:
+  health:
+    jms:
+      enabled: false
+
+
+value:
+  from:
+    file: "../data/personJson.json"

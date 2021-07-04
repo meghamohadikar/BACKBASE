@@ -1,0 +1,88 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "MonitoringResult",
+      "title": "MonitoringResult",
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "target": {
+          "id": "TargetIdentity",
+          "title": "TargetIdentity",
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "accessPoint": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          }
+        },
+        "status": {
+          "title": "Status",
+          "example": "None",
+          "x-enum-elements": [
+            {
+              "name": "None",
+              "description": ""
+            },
+            {
+              "name": "Success",
+              "description": ""
+            },
+            {
+              "name": "Partial",
+              "description": ""
+            },
+            {
+              "name": "Failed",
+              "description": ""
+            },
+            {
+              "name": "Aborted",
+              "description": ""
+            }
+          ],
+          "type": "string",
+          "enum": [
+            "None",
+            "Success",
+            "Partial",
+            "Failed",
+            "Aborted"
+          ]
+        },
+        "criticity": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "started": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "completed": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "children": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "MonitoringResult.json"
+          }
+        }
+      }
+    }

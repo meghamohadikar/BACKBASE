@@ -1,0 +1,18 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "Visit",
+      "title": "Visit",
+      "type": "object",
+      "properties": {
+        "companyCode": {
+          "type": "string"
+        },
+        "contractCode": {
+          "type": "string"
+        },
+        "lastVisitDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }

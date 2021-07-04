@@ -1,0 +1,11 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "Favorite",
+      "title": "Favorite",
+      "type": "object",
+      "properties": {
+        "login": {
+          "type": "string"
+        }
+      }
+    }

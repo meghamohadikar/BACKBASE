@@ -1,0 +1,41 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "ModelState",
+      "title": "ModelState",
+      "type": "object",
+      "properties": {
+        "value": {
+          "id": "ValueProviderResult",
+          "title": "ValueProviderResult",
+          "type": "object",
+          "properties": {
+            "attemptedValue": {
+              "type": "string"
+            },
+            "culture": {
+              "type": "string"
+            },
+            "rawValue": {
+              "type": "object"
+            }
+          }
+        },
+        "errors": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "id": "ModelError",
+            "title": "ModelError",
+            "type": "object",
+            "properties": {
+              "exception": {
+                "type": "object"
+              },
+              "errorMessage": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }

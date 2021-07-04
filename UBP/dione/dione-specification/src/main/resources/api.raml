@@ -1,0 +1,30 @@
+#%RAML 1.0
+title: DCL:ClientData | 2.1.8639 | [FRONT]
+version: v2
+baseUri: https://ubp.dione.clientdata.ev0.corp.ubp.ch/api/v2
+baseUriParameters: {}
+protocols: [ HTTP, HTTPS ]
+types:
+#===============================================================
+# API resource definitions
+#===============================================================
+/persons:
+  get:
+    description: Get Person information
+    responses:
+      200:
+        description: Get person information
+        body:
+          application/json:
+            schema: !include schemas/Person.json
+        headers: {}
+
+    queryParameters:
+      personId:
+        type: string
+        required: false
+        displayName: personId
+      ebankingLogin:
+        type: string
+        required: false
+        displayName: ebankingLogin

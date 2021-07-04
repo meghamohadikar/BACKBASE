@@ -1,0 +1,8 @@
+<configuration>
+    <contextName>auth</contextName>
+
+    <property name="logging.level" value="INFO" />
+    <property name="logging.level.com.backbase.service.auth" value="INFO" />
+
+    <include resource="com/backbase/buildingblocks/logging/base.xml" />
+</configuration>

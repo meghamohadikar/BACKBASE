@@ -1,0 +1,20 @@
+[
+  {
+    "company": "001",
+    "tiersNumber": "6045960",
+    "personName": "pierre",
+    "personSurname": "martin",
+    "personBirthdate": "2017-01-02 05:30:00",
+    "portfolioCode": "PTF",
+    "personId": 123,
+    "hasSignaturePower": true,
+    "homeCountry": "FR",
+    "personType": "VIP",
+    "personRoles": "RM",
+    "personSignature": "SIGNED",
+    "isRepresentative": true,
+    "nameMifidCat": "MIFID1",
+    "knowledge": 20.2,
+    "experience": 30.3
+  }
+]

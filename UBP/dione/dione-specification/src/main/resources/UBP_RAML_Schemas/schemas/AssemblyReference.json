@@ -1,0 +1,14 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "AssemblyReference",
+      "title": "AssemblyReference",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    }

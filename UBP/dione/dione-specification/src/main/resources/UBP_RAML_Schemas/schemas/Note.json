@@ -1,0 +1,33 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "Note",
+      "title": "Note",
+      "type": "object",
+      "properties": {
+        "clientLogin": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updateDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "clientLogin",
+        "title",
+        "body"
+      ]
+    }

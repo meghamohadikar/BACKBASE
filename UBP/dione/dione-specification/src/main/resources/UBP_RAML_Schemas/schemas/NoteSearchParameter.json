@@ -1,0 +1,14 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "NoteSearchParameter",
+      "title": "NoteSearchParameter",
+      "type": "object",
+      "properties": {
+        "clientLogin": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "clientLogin"
+      ]
+    }

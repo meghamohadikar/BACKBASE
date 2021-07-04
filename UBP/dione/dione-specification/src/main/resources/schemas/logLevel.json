@@ -1,0 +1,45 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "title": "logLevel",
+      "example": "LogAlways",
+      "x-enum-elements": [
+        {
+          "name": "LogAlways",
+          "description": ""
+        },
+        {
+          "name": "Critical",
+          "description": ""
+        },
+        {
+          "name": "Error",
+          "description": ""
+        },
+        {
+          "name": "Warning",
+          "description": ""
+        },
+        {
+          "name": "Informational",
+          "description": ""
+        },
+        {
+          "name": "Verbose",
+          "description": ""
+        },
+        {
+          "name": "Debug",
+          "description": ""
+        }
+      ],
+      "type": "string",
+      "enum": [
+        "LogAlways",
+        "Critical",
+        "Error",
+        "Warning",
+        "Informational",
+        "Verbose",
+        "Debug"
+      ]
+    }

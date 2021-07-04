@@ -1,0 +1,20 @@
+#%RAML 1.0
+---
+title: notes
+version: v1
+baseUri: "{version}"
+mediaType:  application/json
+protocols: [ HTTP, HTTPS ]
+#===============================================================
+# API resource definitions
+#===============================================================
+/notes/{id}:
+  get:
+    displayName: notesbyid
+    description: Get note by ID
+    responses:
+      200:
+        description: The note is found
+        body:
+            application/json:
+              type: !include schemas/note.json

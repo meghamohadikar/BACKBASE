@@ -1,0 +1,30 @@
+#
+# Properties for local development only
+#
+
+# Configure embedded app server
+server:
+  port: 9916
+
+# Registry client configuration
+registry:
+  instance:
+    nonSecurePort: ${server.port}
+#    ipAddress: <my network IP address>
+  client:
+    serviceUrl: defaultZone=http://${REGISTRY_HOST:localhost}:${REGISTRY_PORT:8080}/registry/eureka/
+
+
+spring:
+  activemq:
+# broker-url: tcp://localhost:61616
+# Disable Spring JMS
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jms.JmsAutoConfiguration
+
+# TODO 4 : for testing purposes change the external token to just signed (default is signedEncrypted) to be able to check the claims
+# check the docs: https://community.backbase.com/documentation/platform-services/latest/jwt_properties
+sso:
+  jwt:
+    external:
+      type: signed

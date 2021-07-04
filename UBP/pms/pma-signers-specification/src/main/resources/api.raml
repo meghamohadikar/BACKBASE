@@ -1,0 +1,56 @@
+#%RAML 1.0
+---
+#===============================================================
+#  References:
+#    - RAML Specification - https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md
+#===============================================================
+title: pma-signers-specification
+uses: 
+  traits: lib/traits/traits.raml
+version: v1
+baseUri: "/{version}"
+mediaType:  application/json
+protocols: [ HTTP, HTTPS ]
+#===============================================================
+# API resource definitions
+#===============================================================
+
+/PortfolioManagementAggregators:
+ get:
+       displayName: PortfolioManagementAggregators_GetPortfolioSignersAsync
+       description: Get a collection of signers
+       queryParameters:
+         Company:
+           required: true
+           displayName: Company
+           type: string
+         TiersNumber:
+           required: true
+           displayName: TiersNumber
+           type: string
+       responses:
+         200:
+           description: get a collection of signers
+           headers:
+             Content-Type:
+               default: application/json
+               displayName: Content-Type
+               type: string
+           body:
+             application/json:
+              schema: !include schemas/sample_pma_signers.json
+         400:
+            description: BadRequest Request
+            body:
+              application/json:
+               schema: !include schemas/error.json
+         403:
+            description: Request denied
+            body:
+              application/json:
+               schema: !include schemas/error.json
+         404:
+            description: Request NotFound
+            body:
+              application/json:
+               schema: !include schemas/error.json

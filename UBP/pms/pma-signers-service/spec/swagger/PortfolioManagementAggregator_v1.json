@@ -1,0 +1,505 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "v1",
+		"title": "DSP:PortfolioManagementAggregator | 1.0.0 | [COMMON]",
+		"description": "",
+		"contact": {
+			"name": "UBP"
+		}
+	},
+	"host": "localhost:54926",
+	"schemes": ["http"],
+	"paths": {
+		"/configuration/logging/verbosity": {
+			"get": {
+				"tags": ["LoggingConfiguration"],
+				"operationId": "LoggingConfiguration_GetVerbosity",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json",
+				"application/xml",
+				"text/xml"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": ["LoggingConfiguration"],
+				"operationId": "LoggingConfiguration_UpdateVerbosity",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json",
+				"application/xml",
+				"text/xml"],
+				"parameters": [{
+					"name": "logLevel",
+					"in": "query",
+					"required": true,
+					"type": "string",
+					"enum": ["LogAlways",
+					"Critical",
+					"Error",
+					"Warning",
+					"Informational",
+					"Verbose",
+					"Debug"]
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		},
+		"/Monitoring/Check": {
+			"get": {
+				"tags": ["Monitoring"],
+				"operationId": "Monitoring_GetMonitoringResults",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json",
+				"application/xml",
+				"text/xml"],
+				"parameters": [{
+					"name": "category",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "recursive",
+					"in": "query",
+					"required": false,
+					"type": "boolean"
+				}],
+				"responses": {
+					"200": {
+						"description": "run selected checkers by category",
+						"schema": {
+							"$ref": "#/definitions/MonitoringResult"
+						}
+					}
+				}
+			}
+		},
+		"/Monitoring/IsAlive": {
+			"get": {
+				"tags": ["Monitoring"],
+				"operationId": "Monitoring_GetMonitoringResults",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json",
+				"application/xml",
+				"text/xml"],
+				"parameters": [{
+					"name": "recursive",
+					"in": "query",
+					"required": false,
+					"type": "boolean"
+				}],
+				"responses": {
+					"200": {
+						"description": "Check back-end statuses",
+						"schema": {
+							"$ref": "#/definitions/MonitoringResult"
+						}
+					}
+				}
+			}
+		},
+		"/Monitoring/IsDelegating": {
+			"get": {
+				"tags": ["Monitoring"],
+				"operationId": "Monitoring_GetDelegationMonitoringResults",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json",
+				"application/xml",
+				"text/xml"],
+				"parameters": [{
+					"name": "recursive",
+					"in": "query",
+					"required": false,
+					"type": "boolean"
+				}],
+				"responses": {
+					"200": {
+						"description": "Check dione dependencies delegation",
+						"schema": {
+							"$ref": "#/definitions/MonitoringResult"
+						}
+					}
+				}
+			}
+		},
+		"/Monitoring/References": {
+			"get": {
+				"tags": ["Monitoring"],
+				"operationId": "Monitoring_GetAssemblyReferences",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json",
+				"application/xml",
+				"text/xml"],
+				"responses": {
+					"200": {
+						"description": "returns loaded assemblies references",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/AssemblyReference"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/Monitoring/Delegations": {
+			"get": {
+				"tags": ["Monitoring"],
+				"operationId": "Monitoring_GetDelegation",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json",
+				"application/xml",
+				"text/xml"],
+				"responses": {
+					"200": {
+						"description": "get delegation identity",
+						"schema": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		},
+		"/Monitoring/Ping": {
+			"get": {
+				"tags": ["Monitoring"],
+				"operationId": "Monitoring_Ping",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json",
+				"application/xml",
+				"text/xml"],
+				"responses": {
+					"200": {
+						"description": "Check service status",
+						"schema": {
+							"$ref": "#/definitions/Void"
+						}
+					}
+				}
+			}
+		},
+		"/PortfolioManagementAggregators/GetPortfolioBanner": {
+			"get": {
+				"tags": ["PortfolioManagementAggregators"],
+				"summary": "Get a banner",
+				"operationId": "PortfolioManagementAggregators_GetPortfolioBannerAsync",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json",
+				"application/xml",
+				"text/xml"],
+				"parameters": [{
+					"name": "Company",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "TiersNumber",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "get a banner",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ApiBannerEntity"
+							}
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"type": "object",
+							"additionalProperties": {
+								"type": "object"
+							}
+						}
+					},
+					"404": {
+						"description": "NotFound"
+					}
+				}
+			}
+		},
+		"/PortfolioManagementAggregators/GetPortfolioSigners": {
+			"get": {
+				"tags": ["PortfolioManagementAggregators"],
+				"summary": "Get a collection of signers",
+				"operationId": "PortfolioManagementAggregators_GetPortfolioSignersAsync",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json",
+				"application/xml",
+				"text/xml"],
+				"parameters": [{
+					"name": "Company",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "TiersNumber",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				}],
+				"responses": {
+					"200": {
+						"description": "get a collection of signers",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ApiSignerEntity"
+							}
+						}
+					},
+					"400": {
+						"description": "BadRequest",
+						"schema": {
+							"type": "object",
+							"additionalProperties": {
+								"type": "object"
+							}
+						}
+					},
+					"404": {
+						"description": "NotFound"
+					}
+				}
+			}
+		},
+		"/PortfolioManagementAggregators/RaiseException": {
+			"post": {
+				"tags": ["PortfolioManagementAggregators"],
+				"summary": "",
+				"operationId": "PortfolioManagementAggregators_RaiseException",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json",
+				"application/xml",
+				"text/xml"],
+				"responses": {
+					"200": {
+						"description": "raise exception"
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"MonitoringResult": {
+			"type": "object",
+			"properties": {
+				"source": {
+					"type": "string"
+				},
+				"category": {
+					"type": "string"
+				},
+				"target": {
+					"$ref": "#/definitions/TargetIdentity"
+				},
+				"status": {
+					"enum": ["None",
+					"Success",
+					"Partial",
+					"Failed",
+					"Aborted"],
+					"type": "string"
+				},
+				"criticity": {
+					"type": "string"
+				},
+				"message": {
+					"type": "string"
+				},
+				"started": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"completed": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"children": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/MonitoringResult"
+					},
+					"readOnly": true
+				}
+			}
+		},
+		"TargetIdentity": {
+			"type": "object",
+			"properties": {
+				"key": {
+					"type": "string"
+				},
+				"accessPoint": {
+					"type": "string"
+				},
+				"version": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
+				}
+			}
+		},
+		"AssemblyReference": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"version": {
+					"type": "string"
+				}
+			}
+		},
+		"Void": {
+			"type": "object",
+			"properties": {
+				
+			}
+		},
+		"ApiBannerEntity": {
+			"required": ["company",
+			"tiersNumber"],
+			"type": "object",
+			"properties": {
+				"company": {
+					"type": "string"
+				},
+				"tiersNumber": {
+					"type": "string"
+				},
+				"portfolioLabel": {
+					"type": "string"
+				},
+				"portfolioCode": {
+					"type": "string"
+				},
+				"navInSiteCurrency": {
+					"format": "double",
+					"type": "number"
+				},
+				"navInRefCurrency": {
+					"format": "double",
+					"type": "number"
+				},
+				"refCurrency": {
+					"type": "string"
+				},
+				"mgtType": {
+					"type": "string"
+				},
+				"gfeMgtType": {
+					"type": "string"
+				},
+				"carp": {
+					"type": "string"
+				},
+				"investProfil": {
+					"type": "string"
+				},
+				"riskProfil": {
+					"type": "string"
+				},
+				"serviceLevel": {
+					"type": "string"
+				},
+				"averagePrc": {
+					"type": "string"
+				}
+			}
+		},
+		"ApiSignerEntity": {
+			"required": ["company",
+			"tiersNumber"],
+			"type": "object",
+			"properties": {
+				"company": {
+					"type": "string"
+				},
+				"tiersNumber": {
+					"type": "string"
+				},
+				"personName": {
+					"type": "string"
+				},
+				"personSurname": {
+					"type": "string"
+				},
+				"personBirthdate": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"portfolioCode": {
+					"type": "string"
+				},
+				"personId": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"hasSignaturePower": {
+					"type": "boolean"
+				},
+				"homeCountry": {
+					"type": "string"
+				},
+				"personType": {
+					"type": "string"
+				},
+				"personRoles": {
+					"type": "string"
+				},
+				"personSignature": {
+					"type": "string"
+				},
+				"isRepresentative": {
+					"type": "boolean"
+				},
+				"nameMifidCat": {
+					"type": "string"
+				},
+				"knowledge": {
+					"format": "double",
+					"type": "number"
+				},
+				"experience": {
+					"format": "double",
+					"type": "number"
+				}
+			}
+		}
+	}
+}

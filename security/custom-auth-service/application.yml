@@ -1,0 +1,23 @@
+#
+# Properties for local development only
+#
+
+# Configure embedded app server
+server:
+  port: 7778
+
+# Registry client configuration
+eureka:
+  instance:
+    nonSecurePort: ${server.port}
+#    ipAddress: <my network IP address>
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8080/registry/eureka/
+
+spring:
+#  activemq:
+#    broker-url: tcp://localhost:61616
+# Disable Spring JMS
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jms.JmsAutoConfiguration

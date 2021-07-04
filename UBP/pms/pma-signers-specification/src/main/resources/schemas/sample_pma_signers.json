@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "ApiSignerEntity",
+  "title": "ApiSignerEntity",
+  "type": "object",
+  "properties": {
+    "company": {
+      "type": "string"
+    },
+    "tiersNumber": {
+      "type": "string"
+    },
+    "personName": {
+      "type": "string"
+    },
+    "personSurname": {
+      "type": "string"
+    },
+    "personBirthdate": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "portfolioCode": {
+      "type": "string"
+    },
+    "personId": {
+      "format": "int32",
+      "type": "integer"
+    },
+    "hasSignaturePower": {
+      "type": "boolean"
+    },
+    "homeCountry": {
+      "type": "string"
+    },
+    "personType": {
+      "type": "string"
+    },
+    "personRoles": {
+      "type": "string"
+    },
+    "personSignature": {
+      "type": "string"
+    },
+    "isRepresentative": {
+      "type": "boolean"
+    },
+    "nameMifidCat": {
+      "type": "string"
+    },
+    "knowledge": {
+      "format": "double",
+      "type": "number"
+    },
+    "experience": {
+      "format": "double",
+      "type": "number"
+    }
+  }
+}

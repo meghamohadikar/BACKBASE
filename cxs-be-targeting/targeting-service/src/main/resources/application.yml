@@ -1,0 +1,54 @@
+# our service's properties
+myservice:
+  # a unique name for this targeting enabled service
+  name: collector-service
+  # the port on which the service will start
+  port: 8083
+  jms:
+    # the host & port on which activemq is available
+    # host: message-broker-editorial
+    host: localhost
+    port: 61616
+
+registry:
+  instance:
+    # to make this instance available through gateway
+    public: true
+    role: editorial
+    appname: ${myservice.name}
+    nonSecurePort: ${myservice.port}
+    leaseRenewalIntervalInSeconds: 30
+  client:
+    # where the registry is located
+    serviceUrl: defaultZone=http://localhost:8080/registry/eureka
+
+# set sso defaults
+sso:
+  jwt:
+    internal:
+      signature:
+        key:
+          type: ENV
+          value: SIG_SECRET_KEY
+
+# set targeting defaults
+targeting:
+  jms:
+    queue:
+      user: Queue.Backbase.targeting.commands.user
+      reply: Queue.Backbase.targeting.commands.reply
+      execute: Queue.Backbase.targeting.commands.execute
+      executeReply: Queue.Backbase.targeting.commands.execute.reply
+
+server:
+  port: ${myservice.port}
+
+# configure your service for activemq
+spring:
+  activemq:
+    broker-url: tcp://${myservice.jms.host}:${myservice.jms.port}
+    user: admin
+    password: admin
+
+# URL to call external custom-user-service
+user-service-url: http://localhost:8088/users/get/

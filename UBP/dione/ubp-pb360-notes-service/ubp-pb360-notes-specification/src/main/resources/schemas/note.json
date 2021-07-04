@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "clientLogin": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "creationDate": {
+      "type": "datetime"
+    },
+    "updateDate": {
+      "type": "datetime"
+    }
+  },
+  "required": [
+    "clientLogin",
+    "title",
+    "body"
+  ]
+}

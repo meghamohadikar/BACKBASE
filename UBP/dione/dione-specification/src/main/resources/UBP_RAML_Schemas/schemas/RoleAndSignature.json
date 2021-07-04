@@ -1,0 +1,14 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "RoleAndSignature",
+      "title": "RoleAndSignature",
+      "type": "object",
+      "properties": {
+        "signature": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    }

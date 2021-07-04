@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1478,
+    "personNb": 1,
+    "login": "machin",
+    "firstName": "fran",
+    "lastName": "truc",
+    "companyCode": "FR201819700",
+    "isAnonymous": true,
+    "phones": [
+      {
+        "number": "+33688256482",
+        "type": "string"
+      }
+    ],
+    "roleAndSignatures": [
+      {
+        "signature": "signature",
+        "role": "role"
+      }
+    ]
+  },
+  {
+    "id": 2019,
+    "personNb": 5,
+    "login": "perso2",
+    "firstName": "Akrem",
+    "lastName": "KALIMBO",
+    "companyCode": "EN214564800",
+    "isAnonymous": true,
+    "phones": [
+      {
+        "number": "+33788251624",
+        "type": "string"
+      }
+    ],
+    "roleAndSignatures": [
+      {
+        "signature": "signature",
+        "role": "role"
+      }
+    ]
+  }
+]

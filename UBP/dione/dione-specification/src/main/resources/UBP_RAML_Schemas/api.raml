@@ -1,0 +1,495 @@
+#%RAML 1.0
+title: DCL:ClientData | 2.1.8639 | [FRONT]
+version: v2
+baseUri: https://ubp.dione.clientdata.ev0.corp.ubp.ch/api/v2
+baseUriParameters: {}
+protocols: [ HTTP, HTTPS ]
+types:
+#===============================================================
+# API resource definitions
+#===============================================================
+/Contracts:
+  /{contractId}:
+    uriParameters:
+      contractId:
+        type: string
+        required: true
+        displayName: contractId
+    /Persons:
+      uriParameters: {}
+      get:
+        description: Get the list of related persons based on a contract the user is allowed to see and with eBanking access
+        responses:
+          200:
+            description: The list of related persons based on a contract the user is allowed to see and with eBanking access
+            body:
+              application/json:
+                schema: !include schemas/Person-array.json
+
+        queryParameters:
+          eBankingLogin:
+            description: user login for EBanking
+            type: string
+            required: false
+            displayName: eBankingLogin
+          roleType:
+            type: string
+            required: false
+            displayName: roleType
+          personId:
+            description: user person id in SECLI
+            type: string
+            required: false
+            displayName: personId
+    get:
+      responses:
+        200:
+          description: return the contract by id
+          body:
+            application/json:
+              schema: !include schemas/Contract.json
+
+  /LastVisits:
+    post:
+      body:
+        application/json:
+          schema: !include schemas/VisitRequest.json
+      description: Get a collection of Last Visits for a list of Contract Ids
+      responses:
+        200:
+          description: Return a collection of visits for a list of contract Ids
+          body:
+            application/json:
+              schema: !include schemas/Visit-array.json
+
+  /InvestmentTypes:
+    get:
+      description: Get a collection of InvestmentTypes for a current user
+      responses:
+        200:
+          description: Return a collection of InvestmentType for the current user
+          body:
+            application/json:
+              schema: !include schemas/InvestmentType-array.json
+          headers: {}
+  post:
+    body:
+      application/json:
+        schema: !include schemas/ContractRequest.json
+    description: Get a collection of contracts
+    responses:
+      200:
+        description: Return a collection of contracts the user is allowed to see
+        body:
+          application/json:
+            schema: !include schemas/Contract-array.json
+        headers: {}
+
+/Favorites:
+  /{favorite}:
+    uriParameters:
+      favorite:
+        description: login to be deleted
+        type: string
+        required: true
+        displayName: favorite
+
+
+  get:
+    description: Get all Favorites for a current user
+    responses:
+      200:
+        description: Get all Favorites for a current user
+        body:
+          application/json:
+            schema: !include schemas/Favorite-array.json
+        headers: {}
+  post:
+    body:
+      application/json:
+        schema: !include schemas/FavoriteRequest.json
+    description: Create Login Favorite
+    responses:
+      201:
+        description: Favorite Login Created
+        body:
+          application/json:
+            schema: !include schemas/FavoriteResponse.json
+        headers: {}
+      400:
+        description: Request invalid
+        body:
+          application/json:
+            schema: !include schemas/ModelState.json
+      409:
+        description: Conflict
+        body:
+          application/json:
+            schema: !include schemas/ModelState.json
+/configuration/logging/verbosity:
+  get:
+    responses:
+      200:
+        description: OK
+        body:
+          application/json:
+            schema:
+
+  post:
+    responses:
+      200:
+        description: OK
+        body:
+          application/json:
+            schema:
+    queryParameters:
+      logLevel:
+        required: true
+        displayName: logLevel
+        enum:
+        - LogAlways
+        - Critical
+        - Error
+        - Warning
+        - Informational
+        - Verbose
+        - Debug
+/Notes:
+  /Search:
+    post:
+      body:
+        application/json:
+          schema: !include schemas/NoteSearchParameter.json
+      description: Search among manager's notes
+      responses:
+        200:
+          description: Get notes
+          body:
+            application/json:
+              schema: !include schemas/PageOf_Note.json
+          headers: {}
+
+      queryParameters:
+        startPosition:
+          description: Start index from the initial results. By Default, the value 0 is taken.
+          type: integer
+          required: false
+          displayName: startPosition
+        count:
+          description: Number of elements to return. By default, it will return all records
+          type: integer
+          required: false
+          displayName: count
+  /{id}:
+    uriParameters:
+      id:
+        description: Note ID
+        type: integer
+        required: true
+        displayName: id
+    get:
+      description: Get note by ID
+      responses:
+        200:
+          description: The note is found
+          body:
+            application/json:
+              schema: !include schemas/Note.json
+          headers: {}
+
+    put:
+      body:
+        application/json:
+          schema: !include schemas/NoteUpdateParameter.json
+      description: Update a note
+      responses:
+        204:
+          description: Note updated
+          headers: {}
+  post:
+    body:
+      application/json:
+        schema: !include schemas/NoteCreationParameter.json
+    description: Create a note
+    responses:
+      201:
+        description: Note created
+        body:
+          application/json:
+            schema: !include schemas/Note.json
+        headers: {}
+
+/Permissions:
+  get:
+    responses:
+      200:
+        description: return the contract by id
+        body:
+          application/json:
+            schema: !include schemas/Contract.json
+        headers: {}
+
+/persons:
+  /addresses:
+    get:
+      description: Get Person Addresses
+      responses:
+        200:
+          description: Get person information
+          body:
+            application/json:
+              schema: !include schemas/PersonAddress-array.json
+          headers: {}
+  /Picture:
+    post:
+      body:
+        application/json:
+          schema: !include schemas/ProfilePicture.json
+      description: Update profile picture
+      responses:
+        200:
+          description: Profile picture updated
+          headers: {}
+
+    delete:
+      description: Delete profile picture
+      responses:
+        200:
+          description: OK
+          body:
+            application/json:
+              schema:
+
+  /eb-{ebankinglogin}/contracts:
+    uriParameters:
+      ebankinglogin:
+        type: string
+        required: true
+        displayName: ebankinglogin
+    get:
+      responses:
+        200:
+          description: Get person information
+          body:
+            application/json:
+              schema: !include schemas/ContractExtended-array.json
+          headers: {}
+
+      queryParameters:
+        role:
+          type: string
+          required: false
+          displayName: role
+        contractId:
+          type: string
+          required: false
+          displayName: contractId
+  /{personNumber}/contracts:
+    uriParameters:
+      personNumber:
+        type: string
+        required: true
+        displayName: personNumber
+    get:
+      responses:
+        200:
+          description: Get person information
+          body:
+            application/json:
+              schema: !include schemas/ContractExtended-array.json
+          headers: {}
+
+      queryParameters:
+        role:
+          type: string
+          required: false
+          displayName: role
+        contractId:
+          type: string
+          required: false
+          displayName: contractId
+  get:
+    description: Get Person information
+    responses:
+      200:
+        description: Get person information
+        body:
+          application/json:
+            schema: !include schemas/Person.json
+        headers: {}
+
+    queryParameters:
+      personId:
+        type: string
+        required: false
+        displayName: personId
+      ebankingLogin:
+        type: string
+        required: false
+        displayName: ebankingLogin
+/Roles:
+  /{roletypeid}:
+    uriParameters:
+      roletypeid:
+        description: Role type ID
+        type: integer
+        required: true
+        displayName: roletypeid
+    get:
+      description: Get Person information
+      responses:
+        200:
+          description: Get roles
+          body:
+            application/json:
+              schema: !include schemas/Role.json
+          headers: {}
+  get:
+    description: Get Person information
+    responses:
+      200:
+        description: Get roles
+        body:
+          application/json:
+            schema: !include schemas/Role-array.json
+        headers: {}
+/Types/PhoneTypes:
+  /{id}:
+    uriParameters:
+      id:
+        description: Phone type identifier
+        type: integer
+        required: true
+        displayName: id
+    get:
+      description: Get phone type by id
+      responses:
+        200:
+          description: Get phone type
+          body:
+            application/json:
+              schema: !include schemas/PhoneType.json
+          headers: {}
+  get:
+    description: Get phone types
+    responses:
+      200:
+        description: Get phone types
+        body:
+          application/json:
+            schema: !include schemas/PhoneType-array.json
+        headers: {}
+/Managers:
+  /fromfavorites:
+    get:
+      responses:
+        200:
+          description: Get results
+          body:
+            application/json:
+              schema: !include schemas/Favorite-array.json
+          headers: {}
+  /persons:
+    get:
+      description: returns all persons for calling manager
+      responses:
+        200:
+          description: returns all persons for calling manager
+          body:
+            application/json:
+              schema: !include schemas/PageOfPerson.json
+          headers: {}
+
+      queryParameters:
+        pageIndex:
+          description: requested page starting to 1
+          type: integer
+          required: false
+          displayName: pageIndex
+        pageSize:
+          description: page size
+          type: integer
+          required: false
+          displayName: pageSize
+        searchField:
+          description: field for search by firstName or lastName
+          type: string
+          required: false
+          displayName: searchField
+        onlyEbankingAccess:
+          description: filter for only eBanking Clients Access
+          type: boolean
+          required: false
+          displayName: onlyEbankingAccess
+/Monitoring:
+  /Check:
+    get:
+      responses:
+        200:
+          description: run selected checkers by category
+          body:
+            application/json:
+              schema: !include schemas/MonitoringResult.json
+          headers: {}
+      queryParameters:
+        category:
+          type: string
+          required: true
+          displayName: category
+        recursive:
+          type: boolean
+          required: false
+          displayName: recursive
+  /IsAlive:
+    get:
+      responses:
+        200:
+          description: Check back-end statuses
+          body:
+            application/json:
+              schema: !include schemas/MonitoringResult.json
+          headers: {}
+      queryParameters:
+        recursive:
+          type: boolean
+          required: false
+          displayName: recursive
+  /IsDelegating:
+    get:
+      responses:
+        200:
+          description: Check dione dependencies delegation
+          body:
+            application/json:
+              schema: !include schemas/MonitoringResult.json
+          headers: {}
+      queryParameters:
+        recursive:
+          type: boolean
+          required: false
+          displayName: recursive
+  /References:
+    get:
+      responses:
+        200:
+          description: returns loaded assemblies references
+          body:
+            application/json:
+              schema: !include schemas/AssemblyReference-array.json
+          headers: {}
+  /Delegations:
+    get:
+      responses:
+        200:
+          description: get delegation identity
+          body:
+            application/json:
+              schema:
+  /Ping:
+    get:
+      responses:
+        200:
+          description: Check service status
+          body:
+            application/json:
+              schema:

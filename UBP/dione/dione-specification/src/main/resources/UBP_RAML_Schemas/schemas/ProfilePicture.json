@@ -1,0 +1,19 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "ProfilePicture",
+      "title": "ProfilePicture",
+      "type": "object",
+      "properties": {
+        "filename": {
+          "type": "string",
+          "pattern": "^[\\w,\\s-]+\\.[A-Za-z]{3}$"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "filename",
+        "content"
+      ]
+    }

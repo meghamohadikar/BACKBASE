@@ -1,0 +1,14 @@
+ {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "ModelError",
+      "title": "ModelError",
+      "type": "object",
+      "properties": {
+        "exception": {
+          "type": "object"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      }
+    }

@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: ubp-pb360-notes-service

@@ -1,0 +1,20 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "TargetIdentity",
+      "title": "TargetIdentity",
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "accessPoint": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    }

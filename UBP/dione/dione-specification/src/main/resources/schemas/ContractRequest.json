@@ -1,0 +1,21 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "ContractRequest",
+      "title": "ContractRequest",
+      "type": "object",
+      "properties": {
+        "contractIds": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "searchPatern": {
+          "type": "string"
+        },
+        "hasEms": {
+          "type": "boolean"
+        }
+      }
+    }

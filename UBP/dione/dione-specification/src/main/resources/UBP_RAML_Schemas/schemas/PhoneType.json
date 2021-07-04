@@ -1,0 +1,15 @@
+    {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "PhoneType",
+      "title": "PhoneType",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }

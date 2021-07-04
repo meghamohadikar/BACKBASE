@@ -1,0 +1,1338 @@
+#%RAML 1.0
+title: DCL:ClientData | 2.1.8639 | [FRONT]
+version: v2
+baseUri: https://ubp.dione.clientdata.ev0.corp.ubp.ch/api/v2
+baseUriParameters: {}
+protocols:
+- HTTPS
+types:
+  Contract:
+    displayName: Contract
+    type: object
+    properties:
+      companyCode:
+        required: false
+        displayName: companyCode
+        type: string
+      contractCode:
+        required: false
+        displayName: contractCode
+        type: string
+      entitled1:
+        required: false
+        displayName: entitled1
+        type: string
+      entitled2:
+        required: false
+        displayName: entitled2
+        type: string
+      nature:
+        required: false
+        displayName: nature
+        type: string
+      crpRisk:
+        required: false
+        displayName: crpRisk
+        type: integer
+        format: int32
+      rolesAndSignatures:
+        required: false
+        displayName: rolesAndSignatures
+        type: array
+        items:
+          type: RoleAndSignature
+  RoleAndSignature:
+    displayName: RoleAndSignature
+    type: object
+    properties:
+      signature:
+        required: false
+        displayName: signature
+        type: string
+      role:
+        required: false
+        displayName: role
+        type: string
+  ContractRequest:
+    displayName: ContractRequest
+    type: object
+    properties:
+      contractIds:
+        required: false
+        displayName: contractIds
+        type: array
+        items:
+          type: string
+      searchPatern:
+        required: false
+        displayName: searchPatern
+        type: string
+      hasEms:
+        required: false
+        displayName: hasEms
+        type: boolean
+  Person:
+    displayName: Person
+    type: object
+    properties:
+      id:
+        required: false
+        displayName: id
+        type: integer
+        format: int32
+      personNb:
+        required: false
+        displayName: personNb
+        type: integer
+        format: int64
+      login:
+        required: false
+        displayName: login
+        type: string
+      firstName:
+        required: false
+        displayName: firstName
+        type: string
+      lastName:
+        required: false
+        displayName: lastName
+        type: string
+      companyCode:
+        required: false
+        displayName: companyCode
+        type: string
+      isAnonymous:
+        required: false
+        displayName: isAnonymous
+        type: boolean
+      phones:
+        required: false
+        displayName: phones
+        type: array
+        items:
+          type: Phone
+      roleAndSignatures:
+        required: false
+        displayName: roleAndSignatures
+        type: array
+        items:
+          type: RoleAndSignature
+  Phone:
+    displayName: Phone
+    type: object
+    properties:
+      number:
+        required: false
+        displayName: number
+        type: string
+      type:
+        required: false
+        displayName: type
+        type: string
+  VisitRequest:
+    displayName: VisitRequest
+    type: object
+    properties:
+      contractIds:
+        required: false
+        displayName: contractIds
+        type: array
+        items:
+          type: string
+  Visit:
+    displayName: Visit
+    type: object
+    properties:
+      companyCode:
+        required: false
+        displayName: companyCode
+        type: string
+      contractCode:
+        required: false
+        displayName: contractCode
+        type: string
+      lastVisitDate:
+        required: false
+        displayName: lastVisitDate
+        type: datetime
+  InvestmentType:
+    displayName: InvestmentType
+    type: object
+    properties:
+      companyCode:
+        required: false
+        displayName: companyCode
+        type: string
+      contractCode:
+        required: false
+        displayName: contractCode
+        type: string
+      managementType:
+        required: false
+        displayName: managementType
+        type: string
+      associatedRisk:
+        required: false
+        displayName: associatedRisk
+        type: integer
+        format: int32
+  Favorite:
+    displayName: Favorite
+    type: object
+    properties:
+      login:
+        required: false
+        displayName: login
+        type: string
+  FavoriteRequest:
+    displayName: FavoriteRequest
+    type: object
+    properties:
+      favoriteLogin:
+        required: true
+        displayName: favoriteLogin
+        type: string
+  FavoriteResponse:
+    displayName: FavoriteResponse
+    type: object
+    properties:
+      sourceLogin:
+        required: false
+        displayName: sourceLogin
+        type: string
+      favoriteLogin:
+        required: false
+        displayName: favoriteLogin
+        type: string
+  ModelState:
+    displayName: ModelState
+    type: object
+    properties:
+      value:
+        required: false
+        displayName: value
+        type: ValueProviderResult
+      errors:
+        required: false
+        displayName: errors
+        type: array
+        items:
+          type: ModelError
+  ValueProviderResult:
+    displayName: ValueProviderResult
+    type: object
+    properties:
+      attemptedValue:
+        required: false
+        displayName: attemptedValue
+        type: string
+      culture:
+        required: false
+        displayName: culture
+        type: string
+      rawValue:
+        required: false
+        displayName: rawValue
+        type: object
+  ModelError:
+    displayName: ModelError
+    type: object
+    properties:
+      exception:
+        required: false
+        displayName: exception
+        type: object
+      errorMessage:
+        required: false
+        displayName: errorMessage
+        type: string
+  PageOfPerson:
+    displayName: PageOfPerson
+    type: object
+    properties:
+      totalCount:
+        required: false
+        displayName: totalCount
+        type: integer
+        format: int32
+      next:
+        required: false
+        displayName: next
+        type: string
+      content:
+        required: false
+        displayName: content
+        type: array
+        items:
+          type: Person
+  MonitoringResult:
+    displayName: MonitoringResult
+    type: object
+    properties:
+      source:
+        required: false
+        displayName: source
+        type: string
+      category:
+        required: false
+        displayName: category
+        type: string
+      target:
+        required: false
+        displayName: target
+        type: TargetIdentity
+      status:
+        required: false
+        displayName: status
+        type: string
+        enum:
+        - None
+        - Success
+        - Partial
+        - Failed
+        - Aborted
+      criticity:
+        required: false
+        displayName: criticity
+        type: string
+      message:
+        required: false
+        displayName: message
+        type: string
+      started:
+        required: false
+        displayName: started
+        type: datetime
+      completed:
+        required: false
+        displayName: completed
+        type: datetime
+      children:
+        required: false
+        displayName: children
+        type: array
+        items:
+          type: MonitoringResult
+  TargetIdentity:
+    displayName: TargetIdentity
+    type: object
+    properties:
+      key:
+        required: false
+        displayName: key
+        type: string
+      accessPoint:
+        required: false
+        displayName: accessPoint
+        type: string
+      version:
+        required: false
+        displayName: version
+        type: string
+      type:
+        required: false
+        displayName: type
+        type: string
+  AssemblyReference:
+    displayName: AssemblyReference
+    type: object
+    properties:
+      name:
+        required: false
+        displayName: name
+        type: string
+      version:
+        required: false
+        displayName: version
+        type: string
+  NoteSearchParameter:
+    displayName: NoteSearchParameter
+    type: object
+    properties:
+      clientLogin:
+        required: true
+        displayName: clientLogin
+        type: string
+  PageOf[Note]:
+    displayName: PageOf[Note]
+    type: object
+    properties:
+      count:
+        required: false
+        displayName: count
+        type: integer
+        format: int32
+      value:
+        required: false
+        displayName: value
+        type: array
+        items:
+          type: Note
+  Note:
+    displayName: Note
+    type: object
+    properties:
+      id:
+        required: false
+        displayName: id
+        type: string
+      clientLogin:
+        required: true
+        displayName: clientLogin
+        type: string
+      title:
+        required: true
+        displayName: title
+        type: string
+      body:
+        required: true
+        displayName: body
+        type: string
+      creationDate:
+        required: false
+        displayName: creationDate
+        type: datetime
+      updateDate:
+        required: false
+        displayName: updateDate
+        type: datetime
+  NoteUpdateParameter:
+    displayName: NoteUpdateParameter
+    type: object
+    properties:
+      title:
+        required: true
+        displayName: title
+        type: string
+      body:
+        required: true
+        displayName: body
+        type: string
+  NoteCreationParameter:
+    displayName: NoteCreationParameter
+    type: object
+    properties:
+      clientLogin:
+        required: true
+        displayName: clientLogin
+        type: string
+      title:
+        required: true
+        displayName: title
+        type: string
+      body:
+        required: true
+        displayName: body
+        type: string
+  PersonAddress:
+    displayName: PersonAddress
+    type: object
+    properties:
+      companyCode:
+        required: false
+        displayName: companyCode
+        type: string
+      personNb:
+        required: false
+        displayName: personNb
+        type: integer
+        format: int64
+      isoCountry:
+        required: false
+        displayName: isoCountry
+        type: string
+      isFiscalAddress:
+        required: false
+        displayName: isFiscalAddress
+        type: boolean
+      isLegalAddress:
+        required: false
+        displayName: isLegalAddress
+        type: boolean
+      isAdminAddress:
+        required: false
+        displayName: isAdminAddress
+        type: boolean
+      isDomicileAddress:
+        required: false
+        displayName: isDomicileAddress
+        type: boolean
+  ProfilePicture:
+    displayName: ProfilePicture
+    type: object
+    properties:
+      filename:
+        required: true
+        displayName: filename
+        type: string
+        pattern: ^[\w,\s-]+\.[A-Za-z]{3}$
+      content:
+        required: true
+        displayName: content
+        type: string
+  ContractExtended:
+    displayName: ContractExtended
+    type: object
+    properties:
+      ems:
+        required: false
+        displayName: ems
+        type: boolean
+      companyCode:
+        required: false
+        displayName: companyCode
+        type: string
+      contractCode:
+        required: false
+        displayName: contractCode
+        type: string
+      entitled1:
+        required: false
+        displayName: entitled1
+        type: string
+      entitled2:
+        required: false
+        displayName: entitled2
+        type: string
+      nature:
+        required: false
+        displayName: nature
+        type: string
+      crpRisk:
+        required: false
+        displayName: crpRisk
+        type: integer
+        format: int32
+      rolesAndSignatures:
+        required: false
+        displayName: rolesAndSignatures
+        type: array
+        items:
+          type: RoleAndSignature
+  Role:
+    displayName: Role
+    type: object
+    properties:
+      id:
+        required: false
+        displayName: id
+        type: integer
+        format: int32
+      name:
+        required: false
+        displayName: name
+        type: string
+  PhoneType:
+    displayName: PhoneType
+    type: object
+    properties:
+      id:
+        required: false
+        displayName: id
+        type: integer
+        format: int32
+      name:
+        required: false
+        displayName: name
+        type: string
+/Contracts:
+  post:
+    displayName: Contracts_SearchContracts
+    description: Get a collection of contracts
+    body:
+      application/json:
+        displayName: request
+        description: request object
+        type: ContractRequest
+    responses:
+      200:
+        description: Return a collection of contracts the user is allowed to see
+        headers:
+          Content-Type:
+            default: application/json
+            displayName: Content-Type
+            type: string
+        body:
+          application/json:
+            displayName: response
+            description: Return a collection of contracts the user is allowed to see
+            type: array
+            items:
+              type: Contract
+      403:
+        description: Request denied
+  /{contractId}:
+    uriParameters:
+      contractId:
+        required: true
+        displayName: contractId
+        type: string
+    get:
+      displayName: Contracts_GetContract
+      responses:
+        200:
+          description: return the contract by id
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            application/json:
+              displayName: response
+              description: return the contract by id
+              type: Contract
+        400:
+          description: Invalid Request
+          body: {}
+        403:
+          description: Request denied
+          body: {}
+        404:
+          description: return the contract by id
+          body: {}
+    /Persons:
+      get:
+        displayName: Contracts_GetContractPersons
+        description: Get the list of related persons based on a contract the user is allowed to see and with eBanking access
+        queryParameters:
+          eBankingLogin:
+            required: false
+            displayName: eBankingLogin
+            description: user login for EBanking
+            type: string
+          roleType:
+            required: false
+            displayName: roleType
+            type: string
+          personId:
+            required: false
+            displayName: personId
+            description: user person id in SECLI
+            type: string
+        responses:
+          200:
+            description: The list of related persons based on a contract the user is allowed to see and with eBanking access
+            headers:
+              Content-Type:
+                default: application/json
+                displayName: Content-Type
+                type: string
+            body:
+              application/json:
+                displayName: response
+                description: The list of related persons based on a contract the user is allowed to see and with eBanking access
+                type: array
+                items:
+                  type: Person
+          400:
+            description: Invalid Request
+            body: {}
+          403:
+            description: Request denied
+            body: {}
+  /LastVisits:
+    post:
+      displayName: Contracts_GetContractLastVisits
+      description: Get a collection of Last Visits for a list of Contract Ids
+      body:
+        application/json:
+          displayName: request
+          description: An object containing the list of Contract Ids
+          type: VisitRequest
+      responses:
+        200:
+          description: Return a collection of visits for a list of contract Ids
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            application/json:
+              displayName: response
+              description: Return a collection of visits for a list of contract Ids
+              type: array
+              items:
+                type: Visit
+        400:
+          description: Invalid Request
+          body: {}
+        403:
+          description: Request denied
+          body: {}
+  /InvestmentTypes:
+    get:
+      displayName: Contracts_GetContractInvestmentType
+      description: Get a collection of InvestmentTypes for a current user
+      responses:
+        200:
+          description: Return a collection of InvestmentType for the current user
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            application/json:
+              displayName: response
+              description: Return a collection of InvestmentType for the current user
+              type: array
+              items:
+                type: InvestmentType
+/Favorites:
+  get:
+    displayName: Favorites_Get
+    description: Get all Favorites for a current user
+    responses:
+      200:
+        description: Get all Favorites for a current user
+        headers:
+          Content-Type:
+            default: application/json
+            displayName: Content-Type
+            type: string
+        body:
+          application/json:
+            displayName: response
+            description: Get all Favorites for a current user
+            type: array
+            items:
+              type: Favorite
+  post:
+    displayName: Favorites_Post
+    description: Create Login Favorite
+    body:
+      application/json:
+        displayName: request
+        type: FavoriteRequest
+    responses:
+      201:
+        description: Favorite Login Created
+        headers:
+          Content-Type:
+            default: application/json
+            displayName: Content-Type
+            type: string
+        body:
+          application/json:
+            displayName: response
+            description: Favorite Login Created
+            type: FavoriteResponse
+      400:
+        description: Request invalid
+        body:
+          application/json:
+            description: Request invalid
+            type: ModelState
+      409:
+        description: Conflict
+        body:
+          application/json:
+            description: Conflict
+            type: ModelState
+  /{favorite}:
+    uriParameters:
+      favorite:
+        required: true
+        displayName: favorite
+        description: login to be deleted
+        type: string
+    delete:
+      displayName: Favorites_Delete
+      description: Delete Favorite for the connected user
+      responses:
+        204:
+          description: Deleted entity
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+        404:
+          description: NotFound
+          body: {}
+/configuration/logging/verbosity:
+  get:
+    displayName: LoggingConfiguration_GetVerbosity
+    responses:
+      200:
+        description: OK
+        headers:
+          Content-Type:
+            default: application/json
+            displayName: Content-Type
+            type: string
+        body:
+          text/plain:
+            displayName: response
+            description: OK
+            type: any
+  post:
+    displayName: LoggingConfiguration_UpdateVerbosity
+    queryParameters:
+      logLevel:
+        required: true
+        displayName: logLevel
+        type: string
+        enum:
+        - LogAlways
+        - Critical
+        - Error
+        - Warning
+        - Informational
+        - Verbose
+        - Debug
+    responses:
+      200:
+        description: OK
+        headers:
+          Content-Type:
+            default: application/json
+            displayName: Content-Type
+            type: string
+        body:
+          text/plain:
+            displayName: response
+            description: OK
+            type: any
+/Notes:
+  post:
+    displayName: Notes_Create
+    description: Create a note
+    body:
+      application/json:
+        displayName: note
+        description: Note to create
+        type: NoteCreationParameter
+    responses:
+      201:
+        description: Note created
+        headers:
+          Content-Type:
+            default: application/json
+            displayName: Content-Type
+            type: string
+        body:
+          application/json:
+            displayName: response
+            description: Note created
+            type: Note
+      400:
+        description: Request invalid
+        body: {}
+  /Search:
+    post:
+      displayName: Notes_Get
+      description: Search among manager's notes
+      body:
+        application/json:
+          displayName: parameter
+          description: Search parameters
+          type: NoteSearchParameter
+      queryParameters:
+        startPosition:
+          required: false
+          displayName: startPosition
+          description: Start index from the initial results. By Default, the value 0 is taken.
+          type: integer
+          format: int32
+        count:
+          required: false
+          displayName: count
+          description: Number of elements to return. By default, it will return all records
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: Get notes
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            application/json:
+              displayName: response
+              description: Get notes
+/{id}:
+    uriParameters:
+      id:
+        required: true
+        displayName: id
+        description: Note ID
+        type: integer
+        format: int32
+    get:
+      displayName: Notes_Get
+      description: Get note by ID
+      responses:
+        200:
+          description: The note is found
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            application/json:
+              displayName: response
+              description: The note is found
+              type: Note
+    put:
+      displayName: Notes_Update
+      description: Update a note
+      body:
+        application/json:
+          displayName: parameter
+          description: Note information
+          type: NoteUpdateParameter
+      responses:
+        204:
+          description: Note updated
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+    delete:
+      displayName: Notes_Delete
+      description: Delete a note
+      responses:
+        204:
+          description: Note deleted
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+/Permissions:
+  get:
+    displayName: Permissions_GetPermissions
+    responses:
+      200:
+        description: return the contract by id
+        headers:
+          Content-Type:
+            default: application/json
+            displayName: Content-Type
+            type: string
+        body:
+          application/json:
+            displayName: response
+            description: return the contract by id
+            type: Contract
+      404:
+        description: return the contract by id
+        body: {}
+/persons:
+  get:
+    displayName: Person_Get
+    description: Get Person information
+    queryParameters:
+      personId:
+        required: false
+        displayName: personId
+        type: string
+      ebankingLogin:
+        required: false
+        displayName: ebankingLogin
+        type: string
+    responses:
+      200:
+        description: Get person information
+        headers:
+          Content-Type:
+            default: application/json
+            displayName: Content-Type
+            type: string
+        body:
+          application/json:
+            displayName: response
+            description: Get person information
+            type: Person
+  /addresses:
+    get:
+      displayName: Person_GetAddresses
+      description: Get Person Addresses
+      responses:
+        200:
+          description: Get person information
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            application/json:
+              displayName: response
+              description: Get person information
+              type: array
+              items:
+                type: PersonAddress
+  /Picture:
+    post:
+      displayName: Person_CreatePicture
+      description: Update profile picture
+      body:
+        application/json:
+          displayName: request
+          type: ProfilePicture
+      responses:
+        200:
+          description: Profile picture updated
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+
+    delete:
+      displayName: Person_DeletePicture
+      description: Delete profile picture
+      responses:
+        200:
+          description: OK
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            text/plain:
+              displayName: response
+              description: OK
+              type: any
+
+  /eb-{ebankinglogin}/contracts:
+    uriParameters:
+      ebankinglogin:
+        required: true
+        displayName: ebankinglogin
+        type: string
+    get:
+      displayName: Person_GetContractsAndRolesByEbankingLogin
+      queryParameters:
+        role:
+          required: false
+          displayName: role
+          type: string
+        contractId:
+          required: false
+          displayName: contractId
+          type: string
+      responses:
+        200:
+          description: Get person information
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            application/json:
+              displayName: response
+              description: Get person information
+              type: array
+              items:
+                type: ContractExtended
+
+  /{personNumber}/contracts:
+    uriParameters:
+      personNumber:
+        required: true
+        displayName: personNumber
+        type: string
+    get:
+      displayName: Person_GetContractsByInternalIdentifier
+      queryParameters:
+        role:
+          required: false
+          displayName: role
+          type: string
+        contractId:
+          required: false
+          displayName: contractId
+          type: string
+      responses:
+        200:
+          description: Get person information
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            application/json:
+              displayName: response
+              description: Get person information
+              type: array
+              items:
+                type: ContractExtended
+
+/Roles:
+  get:
+    displayName: Roles_Get
+    description: Get Person information
+    responses:
+      200:
+        description: Get roles
+        headers:
+          Content-Type:
+            default: application/json
+            displayName: Content-Type
+            type: string
+        body:
+          application/json:
+            displayName: response
+            description: Get roles
+            type: array
+            items:
+              type: Role
+  /{roletypeid}:
+    uriParameters:
+      roletypeid:
+        required: true
+        displayName: roletypeid
+        description: Role type ID
+        type: integer
+        format: int32
+    get:
+      displayName: Roles_GetById
+      description: Get Person information
+      responses:
+        200:
+          description: Get roles
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            application/json:
+              displayName: response
+              description: Get roles
+              type: Role
+/Types/PhoneTypes:
+  get:
+    displayName: Types_GetPhoneTypes
+    description: Get phone types
+    responses:
+      200:
+        description: Get phone types
+        headers:
+          Content-Type:
+            default: application/json
+            displayName: Content-Type
+            type: string
+        body:
+          application/json:
+            displayName: response
+            description: Get phone types
+            type: array
+            items:
+              type: PhoneType
+  /{id}:
+    uriParameters:
+      id:
+        required: true
+        displayName: id
+        description: Phone type identifier
+        type: integer
+        format: int32
+    get:
+      displayName: Types_GetPhoneTypesById
+      description: Get phone type by id
+      responses:
+        200:
+          description: Get phone type
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            application/json:
+              displayName: response
+              description: Get phone type
+              type: PhoneType
+/Managers:
+  /fromfavorites:
+    get:
+      displayName: Managers_GetListRM
+      responses:
+        200:
+          description: Get results
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            application/json:
+              displayName: response
+              description: Get results
+              type: array
+              items:
+                type: Favorite
+  /persons:
+    get:
+      displayName: Managers_GetPersons
+      description: returns all persons for calling manager
+      queryParameters:
+        pageIndex:
+          required: false
+          displayName: pageIndex
+          description: requested page starting to 1
+          type: integer
+          format: int32
+        pageSize:
+          required: false
+          displayName: pageSize
+          description: page size
+          type: integer
+          format: int32
+        searchField:
+          required: false
+          displayName: searchField
+          description: field for search by firstName or lastName
+          type: string
+        onlyEbankingAccess:
+          required: false
+          displayName: onlyEbankingAccess
+          description: filter for only eBanking Clients Access
+          type: boolean
+      responses:
+        200:
+          description: returns all persons for calling manager
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            application/json:
+              displayName: response
+              description: returns all persons for calling manager
+              type: PageOfPerson
+        403:
+          description: Request denied
+          body: {}
+/Monitoring:
+  /Check:
+    get:
+      displayName: Monitoring_GetMonitoringResults
+      queryParameters:
+        category:
+          required: true
+          displayName: category
+          type: string
+        recursive:
+          required: false
+          displayName: recursive
+          type: boolean
+      responses:
+        200:
+          description: run selected checkers by category
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            application/json:
+              displayName: response
+              description: run selected checkers by category
+              type: MonitoringResult
+  /IsAlive:
+    get:
+      displayName: Monitoring_GetMonitoringResults
+      queryParameters:
+        recursive:
+          required: false
+          displayName: recursive
+          type: boolean
+      responses:
+        200:
+          description: Check back-end statuses
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            application/json:
+              displayName: response
+              description: Check back-end statuses
+              type: MonitoringResult
+  /IsDelegating:
+    get:
+      displayName: Monitoring_GetDelegationMonitoringResults
+      queryParameters:
+        recursive:
+          required: false
+          displayName: recursive
+          type: boolean
+      responses:
+        200:
+          description: Check dione dependencies delegation
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            application/json:
+              displayName: response
+              description: Check dione dependencies delegation
+              type: MonitoringResult
+  /References:
+    get:
+      displayName: Monitoring_GetAssemblyReferences
+      responses:
+        200:
+          description: returns loaded assemblies references
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            application/json:
+              displayName: response
+              description: returns loaded assemblies references
+              type: array
+              items:
+                type: AssemblyReference
+  /Delegations:
+    get:
+      displayName: Monitoring_GetDelegation
+      responses:
+        200:
+          description: get delegation identity
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            text/plain:
+              displayName: response
+              description: get delegation identity
+              type: string
+  /Ping:
+    get:
+      displayName: Monitoring_Ping
+      responses:
+        200:
+          description: Check service status
+          headers:
+            Content-Type:
+              default: application/json
+              displayName: Content-Type
+              type: string
+          body:
+            text/plain:
+              displayName: response
+              description: Check service status
+              type: any

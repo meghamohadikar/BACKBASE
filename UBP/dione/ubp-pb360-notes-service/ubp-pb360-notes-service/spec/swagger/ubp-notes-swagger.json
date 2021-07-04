@@ -1,0 +1,1624 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v2",
+    "title": "DCL:ClientData | 2.1.8639 | [FRONT]",
+    "description": "",
+    "contact": {
+      "name": "UBP"
+    }
+  },
+  "host": "localhost:9090",
+  "basePath": "/api/v2",
+  "schemes": ["http", "https"],
+  "paths": {
+    "/Contracts/{contractId}": {
+      "get": {
+        "tags": ["Contracts"],
+        "operationId": "Contracts_GetContract",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "contractId",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "return the contract by id",
+            "schema": {
+              "$ref": "#/definitions/Contract"
+            }
+          },
+          "400": {
+            "description": "Invalid Request",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "403": {
+            "description": "Request denied",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "404": {
+            "description": "return the contract by id",
+            "schema": {
+              "$ref": "#/definitions/Void"
+            }
+          }
+        }
+      }
+    },
+    "/Contracts": {
+      "post": {
+        "tags": ["Contracts"],
+        "summary": "Get a collection of contracts",
+        "operationId": "Contracts_SearchContracts",
+        "consumes": ["application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded"],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "request",
+          "in": "body",
+          "description": "request object",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ContractRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Return a collection of contracts the user is allowed to see",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Contract"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Request",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "403": {
+            "description": "Request denied",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Contracts/{contractId}/Persons": {
+      "get": {
+        "tags": ["Contracts"],
+        "summary": "Get the list of related persons based on a contract the user is allowed to see and with eBanking access",
+        "operationId": "Contracts_GetContractPersons",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "contractId",
+          "in": "path",
+          "description": "contract Id",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "eBankingLogin",
+          "in": "query",
+          "description": "user login for EBanking",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "roleType",
+          "in": "query",
+          "description": "",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "personId",
+          "in": "query",
+          "description": "user person id in SECLI",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "The list of related persons based on a contract the user is allowed to see and with eBanking access",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Person"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Request",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "403": {
+            "description": "Request denied",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Contracts/LastVisits": {
+      "post": {
+        "tags": ["Contracts"],
+        "summary": "Get a collection of Last Visits for a list of Contract Ids",
+        "operationId": "Contracts_GetContractLastVisits",
+        "consumes": ["application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded"],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "request",
+          "in": "body",
+          "description": "An object containing the list of Contract Ids",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/VisitRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Return a collection of visits for a list of contract Ids",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Visit"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Request",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "403": {
+            "description": "Request denied",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Contracts/InvestmentTypes": {
+      "get": {
+        "tags": ["Contracts"],
+        "summary": "Get a collection of InvestmentTypes for a current user",
+        "operationId": "Contracts_GetContractInvestmentType",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "responses": {
+          "200": {
+            "description": "Return a collection of InvestmentType for the current user",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InvestmentType"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Favorites": {
+      "get": {
+        "tags": ["Favorites"],
+        "summary": "Get all Favorites for a current user",
+        "operationId": "Favorites_Get",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "responses": {
+          "200": {
+            "description": "Get all Favorites for a current user",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Favorite"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Favorites"],
+        "summary": "Create Login Favorite",
+        "operationId": "Favorites_Post",
+        "consumes": ["application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded"],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FavoriteRequest"
+          }
+        }],
+        "responses": {
+          "201": {
+            "description": "Favorite Login Created",
+            "schema": {
+              "$ref": "#/definitions/FavoriteResponse"
+            }
+          },
+          "400": {
+            "description": "Request invalid",
+            "schema": {
+              "$ref": "#/definitions/ModelState"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/ModelState"
+            }
+          }
+        }
+      }
+    },
+    "/Favorites/{favorite}": {
+      "delete": {
+        "tags": ["Favorites"],
+        "summary": "Delete Favorite for the connected user",
+        "operationId": "Favorites_Delete",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "favorite",
+          "in": "path",
+          "description": "login to be deleted",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "204": {
+            "description": "Deleted entity"
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/configuration/logging/verbosity": {
+      "get": {
+        "tags": ["LoggingConfiguration"],
+        "operationId": "LoggingConfiguration_GetVerbosity",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["LoggingConfiguration"],
+        "operationId": "LoggingConfiguration_UpdateVerbosity",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "logLevel",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": ["LogAlways", "Critical", "Error", "Warning", "Informational", "Verbose", "Debug"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/Managers/fromfavorites": {
+      "get": {
+        "tags": ["Managers"],
+        "operationId": "Managers_GetListRM",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "responses": {
+          "200": {
+            "description": "Get results",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Favorite"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Managers/persons": {
+      "get": {
+        "tags": ["Managers"],
+        "summary": "returns all persons for calling manager",
+        "operationId": "Managers_GetPersons",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "pageIndex",
+          "in": "query",
+          "description": "requested page starting to 1",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "page size",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "searchField",
+          "in": "query",
+          "description": "field for search by firstName or lastName",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "onlyEbankingAccess",
+          "in": "query",
+          "description": "filter for only eBanking Clients Access",
+          "required": false,
+          "type": "boolean"
+        }],
+        "responses": {
+          "200": {
+            "description": "returns all persons for calling manager",
+            "schema": {
+              "$ref": "#/definitions/PageOfPerson"
+            }
+          },
+          "403": {
+            "description": "Request denied",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Monitoring/Check": {
+      "get": {
+        "tags": ["Monitoring"],
+        "operationId": "Monitoring_GetMonitoringResults",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "category",
+          "in": "query",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "recursive",
+          "in": "query",
+          "required": false,
+          "type": "boolean"
+        }],
+        "responses": {
+          "200": {
+            "description": "run selected checkers by category",
+            "schema": {
+              "$ref": "#/definitions/MonitoringResult"
+            }
+          }
+        }
+      }
+    },
+    "/Monitoring/IsAlive": {
+      "get": {
+        "tags": ["Monitoring"],
+        "operationId": "Monitoring_GetMonitoringResults",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "recursive",
+          "in": "query",
+          "required": false,
+          "type": "boolean"
+        }],
+        "responses": {
+          "200": {
+            "description": "Check back-end statuses",
+            "schema": {
+              "$ref": "#/definitions/MonitoringResult"
+            }
+          }
+        }
+      }
+    },
+    "/Monitoring/IsDelegating": {
+      "get": {
+        "tags": ["Monitoring"],
+        "operationId": "Monitoring_GetDelegationMonitoringResults",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "recursive",
+          "in": "query",
+          "required": false,
+          "type": "boolean"
+        }],
+        "responses": {
+          "200": {
+            "description": "Check dione dependencies delegation",
+            "schema": {
+              "$ref": "#/definitions/MonitoringResult"
+            }
+          }
+        }
+      }
+    },
+    "/Monitoring/References": {
+      "get": {
+        "tags": ["Monitoring"],
+        "operationId": "Monitoring_GetAssemblyReferences",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "responses": {
+          "200": {
+            "description": "returns loaded assemblies references",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AssemblyReference"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Monitoring/Delegations": {
+      "get": {
+        "tags": ["Monitoring"],
+        "operationId": "Monitoring_GetDelegation",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "responses": {
+          "200": {
+            "description": "get delegation identity",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/Monitoring/Ping": {
+      "get": {
+        "tags": ["Monitoring"],
+        "operationId": "Monitoring_Ping",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "responses": {
+          "200": {
+            "description": "Check service status",
+            "schema": {
+              "$ref": "#/definitions/Void"
+            }
+          }
+        }
+      }
+    },
+    "/Notes/Search": {
+      "post": {
+        "tags": ["Notes"],
+        "summary": "Search among manager's notes",
+        "operationId": "Notes_Get",
+        "consumes": ["application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded"],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "parameter",
+          "in": "body",
+          "description": "Search parameters",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/NoteSearchParameter"
+          }
+        }, {
+          "name": "startPosition",
+          "in": "query",
+          "description": "Start index from the initial results. By Default, the value 0 is taken.",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "count",
+          "in": "query",
+          "description": "Number of elements to return. By default, it will return all records",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "Get notes",
+            "schema": {
+              "$ref": "#/definitions/PageOf[Note]"
+            }
+          },
+          "400": {
+            "description": "Request invalid",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Notes/{id}": {
+      "get": {
+        "tags": ["Notes"],
+        "summary": "Get note by ID",
+        "operationId": "Notes_Get",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Note ID",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "The note is found",
+            "schema": {
+              "$ref": "#/definitions/Note"
+            }
+          },
+          "400": {
+            "description": "Request invalid",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "403": {
+            "description": "Request denied",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "404": {
+            "description": "Entity not found",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Notes"],
+        "summary": "Update a note",
+        "operationId": "Notes_Update",
+        "consumes": ["application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded"],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Note ID",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "parameter",
+          "in": "body",
+          "description": "Note information",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/NoteUpdateParameter"
+          }
+        }],
+        "responses": {
+          "204": {
+            "description": "Note updated"
+          },
+          "400": {
+            "description": "Request invalid",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "403": {
+            "description": "Request denied",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "404": {
+            "description": "Entity not found",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Notes"],
+        "summary": "Delete a note",
+        "operationId": "Notes_Delete",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Note ID",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "204": {
+            "description": "Note deleted"
+          },
+          "400": {
+            "description": "Request invalid",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "403": {
+            "description": "Request denied",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "404": {
+            "description": "Entity not found",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Notes": {
+      "post": {
+        "tags": ["Notes"],
+        "summary": "Create a note",
+        "operationId": "Notes_Create",
+        "consumes": ["application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded"],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "note",
+          "in": "body",
+          "description": "Note to create",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/NoteCreationParameter"
+          }
+        }],
+        "responses": {
+          "201": {
+            "description": "Note created",
+            "schema": {
+              "$ref": "#/definitions/Note"
+            }
+          },
+          "400": {
+            "description": "Request invalid",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Permissions": {
+      "get": {
+        "tags": ["Permissions"],
+        "operationId": "Permissions_GetPermissions",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "responses": {
+          "200": {
+            "description": "return the contract by id",
+            "schema": {
+              "$ref": "#/definitions/Contract"
+            }
+          },
+          "404": {
+            "description": "return the contract by id",
+            "schema": {
+              "$ref": "#/definitions/Void"
+            }
+          }
+        }
+      }
+    },
+    "/persons": {
+      "get": {
+        "tags": ["Person"],
+        "summary": "Get Person information",
+        "operationId": "Person_Get",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "personId",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "ebankingLogin",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Get person information",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          },
+          "400": {
+            "description": "Request invalid",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "403": {
+            "description": "Request denied",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/persons/addresses": {
+      "get": {
+        "tags": ["Person"],
+        "summary": "Get Person Addresses",
+        "operationId": "Person_GetAddresses",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "responses": {
+          "200": {
+            "description": "Get person information",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PersonAddress"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/persons/Picture": {
+      "post": {
+        "tags": ["Person"],
+        "summary": "Update profile picture",
+        "operationId": "Person_CreatePicture",
+        "consumes": ["application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded"],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ProfilePicture"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Profile picture updated"
+          },
+          "400": {
+            "description": "Request invalid",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Person"],
+        "summary": "Delete profile picture",
+        "operationId": "Person_DeletePicture",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "Profile picture deleted"
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/persons/eb-{ebankinglogin}/contracts": {
+      "get": {
+        "tags": ["Person"],
+        "operationId": "Person_GetContractsAndRolesByEbankingLogin",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "ebankinglogin",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "role",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "contractId",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Get person information",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ContractExtended"
+              }
+            }
+          },
+          "400": {
+            "description": "Request invalid",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "403": {
+            "description": "Request denied",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/persons/{personNumber}/contracts": {
+      "get": {
+        "tags": ["Person"],
+        "operationId": "Person_GetContractsByInternalIdentifier",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "personNumber",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "role",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "contractId",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Get person information",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ContractExtended"
+              }
+            }
+          },
+          "400": {
+            "description": "Request invalid",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "403": {
+            "description": "Request denied",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/Roles": {
+      "get": {
+        "tags": ["Roles"],
+        "summary": "Get Person information",
+        "operationId": "Roles_Get",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "responses": {
+          "200": {
+            "description": "Get roles",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Role"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Roles/{roletypeid}": {
+      "get": {
+        "tags": ["Roles"],
+        "summary": "Get Person information",
+        "operationId": "Roles_GetById",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "roletypeid",
+          "in": "path",
+          "description": "Role type ID",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "Get roles",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
+          }
+        }
+      }
+    },
+    "/Types/PhoneTypes": {
+      "get": {
+        "tags": ["Types"],
+        "summary": "Get phone types",
+        "operationId": "Types_GetPhoneTypes",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "responses": {
+          "200": {
+            "description": "Get phone types",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PhoneType"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Types/PhoneTypes/{id}": {
+      "get": {
+        "tags": ["Types"],
+        "summary": "Get phone type by id",
+        "operationId": "Types_GetPhoneTypesById",
+        "consumes": [],
+        "produces": ["application/json", "text/json", "application/xml", "text/xml"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Phone type identifier",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "Get phone type",
+            "schema": {
+              "$ref": "#/definitions/PhoneType"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Contract": {
+      "type": "object",
+      "properties": {
+        "companyCode": {
+          "type": "string"
+        },
+        "contractCode": {
+          "type": "string"
+        },
+        "entitled1": {
+          "type": "string"
+        },
+        "entitled2": {
+          "type": "string"
+        },
+        "nature": {
+          "type": "string"
+        },
+        "crpRisk": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "rolesAndSignatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleAndSignature"
+          }
+        }
+      }
+    },
+    "RoleAndSignature": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    },
+    "Void": {
+      "type": "object",
+      "properties": {}
+    },
+    "ContractRequest": {
+      "type": "object",
+      "properties": {
+        "contractIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "searchPatern": {
+          "type": "string"
+        },
+        "hasEms": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Person": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "personNb": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "login": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "companyCode": {
+          "type": "string"
+        },
+        "isAnonymous": {
+          "type": "boolean"
+        },
+        "phones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Phone"
+          }
+        },
+        "roleAndSignatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleAndSignature"
+          }
+        }
+      }
+    },
+    "Phone": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "VisitRequest": {
+      "type": "object",
+      "properties": {
+        "contractIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Visit": {
+      "type": "object",
+      "properties": {
+        "companyCode": {
+          "type": "string"
+        },
+        "contractCode": {
+          "type": "string"
+        },
+        "lastVisitDate": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "InvestmentType": {
+      "type": "object",
+      "properties": {
+        "companyCode": {
+          "type": "string"
+        },
+        "contractCode": {
+          "type": "string"
+        },
+        "managementType": {
+          "type": "string"
+        },
+        "associatedRisk": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "Favorite": {
+      "type": "object",
+      "properties": {
+        "login": {
+          "type": "string"
+        }
+      }
+    },
+    "FavoriteRequest": {
+      "required": ["favoriteLogin"],
+      "type": "object",
+      "properties": {
+        "favoriteLogin": {
+          "type": "string"
+        }
+      }
+    },
+    "FavoriteResponse": {
+      "type": "object",
+      "properties": {
+        "sourceLogin": {
+          "type": "string"
+        },
+        "favoriteLogin": {
+          "type": "string"
+        }
+      }
+    },
+    "ModelState": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ValueProviderResult"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelError"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ValueProviderResult": {
+      "type": "object",
+      "properties": {
+        "attemptedValue": {
+          "type": "string",
+          "readOnly": true
+        },
+        "culture": {
+          "type": "string",
+          "readOnly": true
+        },
+        "rawValue": {
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
+    "ModelError": {
+      "type": "object",
+      "properties": {
+        "exception": {
+          "type": "object",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PageOfPerson": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "next": {
+          "type": "string"
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Person"
+          }
+        }
+      }
+    },
+    "MonitoringResult": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "target": {
+          "$ref": "#/definitions/TargetIdentity"
+        },
+        "status": {
+          "enum": ["None", "Success", "Partial", "Failed", "Aborted"],
+          "type": "string"
+        },
+        "criticity": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "started": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "completed": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoringResult"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "TargetIdentity": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "accessPoint": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "AssemblyReference": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "NoteSearchParameter": {
+      "required": ["clientLogin"],
+      "type": "object",
+      "properties": {
+        "clientLogin": {
+          "type": "string"
+        }
+      }
+    },
+    "PageOf[Note]": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Note"
+          }
+        }
+      }
+    },
+    "Note": {
+      "required": ["clientLogin", "title", "body"],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "clientLogin": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "creationDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "updateDate": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "NoteUpdateParameter": {
+      "required": ["title", "body"],
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        }
+      }
+    },
+    "NoteCreationParameter": {
+      "required": ["clientLogin", "title", "body"],
+      "type": "object",
+      "properties": {
+        "clientLogin": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        }
+      }
+    },
+    "PersonAddress": {
+      "type": "object",
+      "properties": {
+        "companyCode": {
+          "type": "string"
+        },
+        "personNb": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "isoCountry": {
+          "type": "string"
+        },
+        "isFiscalAddress": {
+          "type": "boolean"
+        },
+        "isLegalAddress": {
+          "type": "boolean"
+        },
+        "isAdminAddress": {
+          "type": "boolean"
+        },
+        "isDomicileAddress": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ProfilePicture": {
+      "required": ["filename", "content"],
+      "type": "object",
+      "properties": {
+        "filename": {
+          "pattern": "^[\\w,\\s-]+\\.[A-Za-z]{3}$",
+          "type": "string"
+        },
+        "content": {
+          "format": "byte",
+          "type": "string"
+        }
+      }
+    },
+    "ContractExtended": {
+      "type": "object",
+      "properties": {
+        "ems": {
+          "type": "boolean"
+        },
+        "companyCode": {
+          "type": "string"
+        },
+        "contractCode": {
+          "type": "string"
+        },
+        "entitled1": {
+          "type": "string"
+        },
+        "entitled2": {
+          "type": "string"
+        },
+        "nature": {
+          "type": "string"
+        },
+        "crpRisk": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "rolesAndSignatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleAndSignature"
+          }
+        }
+      }
+    },
+    "Role": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "PhoneType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

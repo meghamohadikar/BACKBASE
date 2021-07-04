@@ -1,0 +1,14 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "Phone",
+      "title": "Phone",
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    }

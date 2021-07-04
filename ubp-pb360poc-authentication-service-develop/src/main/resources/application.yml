@@ -1,0 +1,67 @@
+# Registry client configuration
+eureka:
+    instance:
+        healthCheckUrlPath: /production-support/health
+        statusPageUrlPath: /production-support/health
+    client:
+        serviceUrl:
+            defaultZone: http://registry-editorial:8761/registry/eureka/
+
+authentication:
+    jms:
+        topic:
+            login: VirtualTopic.Backbase.auth.login
+            logout: VirtualTopic.Backbase.auth.logout
+
+auth:
+    token:
+        converter:
+            validationEnabled: true
+            allowedApiKeys: A3HC6A0347HH,7HHGI3ZYLL6R
+
+token:
+    converter:
+        allowedApiHeader: X-TokenConverter-ApiKey
+
+# Configure Internal JWT
+sso:
+    jwt:
+        internal:
+            signature:
+                key:
+                    type: ENV
+                    value: SIG_SECRET_KEY
+        # Configure External JWT
+        external:
+            signature:
+                key:
+                    type: ENV
+                    value: EXTERNAL_SIG_SECRET_KEY
+            encryption:
+                key:
+                    type: ENV
+                    value: EXTERNAL_ENC_SECRET_KEY
+
+#Define app defaults
+endpoints:
+    jmx:
+        domain: ${spring.application.name}
+
+# Disable healthcheck for JMS
+# Service health should be UP even if JMS broker is not available.
+management:
+    health:
+        jms:
+            enabled: false
+
+kerberos:
+    adDomain: ${KERBEROS_AD_DOMAIN:UBPDEV.LOCAL}
+    adServer: ${KERBEROS_AD_SERVER:ldap://194.3.235.134:389}
+    servicePrincipal: ${KERBEROS_SERVICE_PRINCIPAL:HTTP/tomcat2@UBPDEV.LOCAL}
+#    keytabLocation: /Users/floriantirard/Dev/UBP/tools/apache-tomcat-8.5.37/conf/tomcat.keytab
+    classpathResources: ${KERBEROS_CLASSPATH_RESOURCES:true}
+    keytabLocation: ${KERBEROS_KEYTAB_LOCATION:tomcat.keytab}
+    krb5Ini: ${KERBEROS_KRB5INI_LOCATION:krb5.conf}
+    debugMode: ${KERBEROS_DEBUG_MODE:true}
+    ldapSearchBase: ${KERBEROS_LDAP_SEARCH_BASE:dc=ubpdev,dc=local}
+    ldapSearchFilter: ${KERBEROS_LDAP_SEARCH_FILTER:(cn={0},ou=Employees)}

@@ -1,0 +1,50 @@
+ {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "type": "array",
+      "items": {
+        "id": "ContractExtended",
+        "title": "ContractExtended",
+        "type": "object",
+        "properties": {
+          "ems": {
+            "type": "boolean"
+          },
+          "companyCode": {
+            "type": "string"
+          },
+          "contractCode": {
+            "type": "string"
+          },
+          "entitled1": {
+            "type": "string"
+          },
+          "entitled2": {
+            "type": "string"
+          },
+          "nature": {
+            "type": "string"
+          },
+          "crpRisk": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rolesAndSignatures": {
+            "description": "",
+            "type": "array",
+            "items": {
+              "id": "RoleAndSignature",
+              "title": "RoleAndSignature",
+              "type": "object",
+              "properties": {
+                "signature": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }

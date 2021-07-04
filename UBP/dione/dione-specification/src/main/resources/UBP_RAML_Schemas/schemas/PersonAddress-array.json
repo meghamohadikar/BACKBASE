@@ -1,0 +1,33 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "type": "array",
+      "items": {
+        "id": "PersonAddress",
+        "title": "PersonAddress",
+        "type": "object",
+        "properties": {
+          "companyCode": {
+            "type": "string"
+          },
+          "personNb": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "isoCountry": {
+            "type": "string"
+          },
+          "isFiscalAddress": {
+            "type": "boolean"
+          },
+          "isLegalAddress": {
+            "type": "boolean"
+          },
+          "isAdminAddress": {
+            "type": "boolean"
+          },
+          "isDomicileAddress": {
+            "type": "boolean"
+          }
+        }
+      }
+    }

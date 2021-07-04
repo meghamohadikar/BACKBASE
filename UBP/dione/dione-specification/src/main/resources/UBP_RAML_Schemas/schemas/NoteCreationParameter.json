@@ -1,0 +1,22 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "NoteCreationParameter",
+      "title": "NoteCreationParameter",
+      "type": "object",
+      "properties": {
+        "clientLogin": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "clientLogin",
+        "title",
+        "body"
+      ]
+    }

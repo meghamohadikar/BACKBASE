@@ -1,0 +1,116 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.backbase.training</groupId>
+    <artifactId>custom-auth-provider</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <name>Custom Authentication Provider</name>
+    <description>Custom Authentication Provider</description>
+
+    <parent>
+        <groupId>com.backbase.buildingblocks</groupId>
+        <artifactId>authentication-external-jwt-service-spring-boot-starter-parent</artifactId>
+        <!-- USE THE LATEST VERSION -->
+        <version>1.12.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <!-- Extra dependencies for this service -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>1.5.12.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <finalName>security-custom-auth-provider</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <layout>MODULE</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Inject secret key for the tests-->
+            <!-- Same secret key as the Gateway has-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <SIG_SECRET_KEY>JWTSecretKeyDontUseInProduction!</SIG_SECRET_KEY>
+                        <EXTERNAL_SIG_SECRET_KEY>JWTSecretKeyDontUseInProduction!</EXTERNAL_SIG_SECRET_KEY>
+                        <EXTERNAL_ENC_SECRET_KEY>JWTEncKeyDontUseInProduction666!</EXTERNAL_ENC_SECRET_KEY>
+                        <buildDirectory>${project.build.directory}</buildDirectory>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+
+            <!-- Inject secret key for local development -->
+            <!-- Same key as the gateway has -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>set-system-properties</goal>
+                        </goals>
+                        <configuration>
+                            <properties>
+                                <property>
+                                    <name>SIG_SECRET_KEY</name>
+                                    <value>JWTSecretKeyDontUseInProduction!</value>
+                                </property>
+                                <property>
+                                    <name>EXTERNAL_SIG_SECRET_KEY</name>
+                                    <value>JWTSecretKeyDontUseInProduction!</value>
+                                </property>
+                                <property>
+                                    <name>EXTERNAL_ENC_SECRET_KEY</name>
+                                    <value>JWTEncKeyDontUseInProduction666!</value>
+                                </property>
+                            </properties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

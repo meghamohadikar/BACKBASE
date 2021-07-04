@@ -1,0 +1,15 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "VisitRequest",
+      "title": "VisitRequest",
+      "type": "object",
+      "properties": {
+        "contractIds": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
